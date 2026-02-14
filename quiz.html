@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Cuánto nos conocemos?</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: #fff0f3;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 3px solid #ffb7b2;
+        }
+
+        .question {
+            font-size: 1.5rem;
+            color: #d81b60;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: #ffe5ec;
+            border: 2px solid #ffb7b2;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .option-btn:hover {
+            background: #ffb7b2;
+            color: white;
+        }
+
+        /* Feedback visual */
+        #feedback {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 24px;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .correct { background: #d4edda; color: #155724; }
+        .wrong { background: #f8d7da; color: #721c24; }
+
+        .hidden { display: none !important; }
+
+        #next-quiz-btn {
+            margin-top: 20px;
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2 class="script-font" style="font-size: 2.5rem; color: #ff4d6d;">Trivia de Nosotros</h2>
+        <div id="quiz-content">
+            <p id="question-text" class="question"></p>
+            <div id="options-container" class="options"></div>
+            <div id="feedback"></div>
+            <button id="next-quiz-btn" class="hidden" onclick="nextQuestion()">Siguiente Pregunta ➔</button>
+        </div>
+        
+        <div id="quiz-final" class="hidden">
+            <h3 class="script-font" style="font-size: 2rem;">¡Eres la mejor! 💖</h3>
+            <p>No importa si fallaste alguna, lo que importa es que cada momento contigo es mi favorito.</p>
+            <a href="carta.html" class="btn-next" style="display: block; margin-top: 20px;">Ahora sí, lee esto... 💌</a>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "¿Dónde fue nuestra primera cita?",
+                a: ["A comer helados", "Al cine", "En un parque", "En un restaurante"],
+                correct: 1, // Elige el índice correcto (empezando en 0)
+                msgCorrect: "¡Exacto mi beby! Ese día fue precioso y estaba un poco caga** jeje 💖",
+                msgWrong: "¡Casi! Pero te perdono porque es tu cumple y ese día fue hace mucho 😂"
+            },
+            {
+                q: "¿Quien dio el primer besito?",
+                a: ["Tu", "Al mismo tiempo", "Yo"],
+                correct: 2,
+                msgCorrect: "¡Obvio! estaba loco por comerme esa boquita 😋",
+                msgWrong: "Error... pero no te preocupes, ¡segui creyendo que fuiste vos! 😂"
+            },
+            {
+                q: "¿Quién dijo 'Te amo' primero?",
+                a: ["Tú", "Yo", "Al mismo tiempo", "Ninguno todavía"],
+                correct: 1,
+                msgCorrect: "¡Sí! No pude aguantar más lo que sentía 😍",
+                msgWrong: "¡Ay no! ¿Ya se te olvidó ese momento quien fue? okey okey... 😂"
+            }
+        ];
+
+        let currentQ = 0;
+
+        function loadQuestion() {
+            const qData = questions[currentQ];
+            document.getElementById('question-text').innerText = qData.q;
+            const optionsDiv = document.getElementById('options-container');
+            optionsDiv.innerHTML = '';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('next-quiz-btn').classList.add('hidden');
+
+            qData.a.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(index);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(choice) {
+            const qData = questions[currentQ];
+            const feedback = document.getElementById('feedback');
+            feedback.style.display = 'block';
+            
+            // Deshabilitar botones para que no cambie de opinión
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(b => b.disabled = true);
+
+            if (choice === qData.correct) {
+                feedback.innerText = qData.msgCorrect;
+                feedback.className = 'correct';
+            } else {
+                feedback.innerText = qData.msgWrong;
+                feedback.className = 'wrong';
+            }
+            document.getElementById('next-quiz-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if (currentQ < questions.length) {
+                loadQuestion();
+            } else {
+                document.getElementById('quiz-content').classList.add('hidden');
+                document.getElementById('quiz-final').classList.remove('hidden');
+            }
+        }
+
+        loadQuestion();
+    </script>
+<div id="progress-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: #ffe5ec; z-index: 9999;">
+    <div id="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb7b2, #ff4d6d); transition: width 0.5s ease-in-out;"></div>
+    <div id="heart-pointer" style="position: absolute; top: -5px; left: 0%; transition: left 0.5s ease-in-out; font-size: 15px;">❤️</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Razones por las que Te Amo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: #fffafa;
+            padding-bottom: 50px;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Estilo de los Corazones/Sobres */
+        .reason-node {
+            background: #ffb7b2;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; /* Forma medio de corazón/huevo */
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 183, 178, 0.4);
+            position: relative;
+        }
+
+        .reason-node:hover {
+            transform: scale(1.1);
+            background: #ff4d6d;
+        }
+
+        /* Modal (Ventana Emergente) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .reason-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #d81b60;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop autoplay>
+        <source src="music/carta.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h1 class="script-font" style="font-size: 3rem;">10 Razones para Amarte</h1>
+        <p>Haz clic en cada corazón para descubrirlo...</p>
+
+        <div class="reasons-grid">
+            <div class="reason-node" onclick="showReason(1)">1</div>
+            <div class="reason-node" onclick="showReason(2)">2</div>
+            <div class="reason-node" onclick="showReason(3)">3</div>
+            <div class="reason-node" onclick="showReason(4)">4</div>
+            <div class="reason-node" onclick="showReason(5)">5</div>
+            <div class="reason-node" onclick="showReason(6)">6</div>
+            <div class="reason-node" onclick="showReason(7)">7</div>
+            <div class="reason-node" onclick="showReason(8)">8</div>
+            <div class="reason-node" onclick="showReason(9)">9</div>
+            <div class="reason-node" onclick="showReason(10)">10</div>
+        </div>
+
+        <a href="regalos.html" class="btn-next">¡Eso no es todo! Mira esto... ✨</a>
+    </div>
+
+    <div id="reasonModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span style="font-size: 3rem;">💖</span>
+            <p id="reasonText" class="reason-text"></p>
+        </div>
+    </div>
+
+    <script>
+        const razones = {
+            1: "Amo cómo iluminas cualquier lugar con tu sonrisa.",
+            2: "Amo tu paciencia infinita conmigo.",
+            3: "Amo la forma en que me miras.",
+            4: "Por cómo me apoyas en cada cosa que yo hago.",
+            5: "Por como me haces sentir cuando estoy contigo.",
+            6: "Porque eres mi lugar seguro en este mundo.",
+            7: "Amo ser yo el que te bese y te abrace, porque como tu no hay 2.",
+            8: "Por esos abrazos, por esos momentos tan lindos cuando nos vemos y no paramos de reirnos.",
+            9: "Por la persona increíble, fuerte, hermosa, preciosa y valiente que eres.",
+            10: "Simplemente, porque eres tú y no te cambiaría por nada jamas en la vida."
+        };
+
+        function showReason(num) {
+            document.getElementById('reasonText').innerText = razones[num];
+            document.getElementById('reasonModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('reasonModal').style.display = 'none';
+        }
+
+        // Cerrar modal si hace clic fuera del cuadro blanco
+        window.onclick = function(event) {
+            const modal = document.getElementById('reasonModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+    <script src="js/main.js"></script>
+    
+
+<div id="progress-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: #ffe5ec; z-index: 9999;">
+    <div id="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb7b2, #ff4d6d); transition: width 0.5s ease-in-out;"></div>
+    <div id="heart-pointer" style="position: absolute; top: -5px; left: 0%; transition: left 0.5s ease-in-out; font-size: 15px;">❤️</div>
+</div>
+
+
+</body>
+</html>

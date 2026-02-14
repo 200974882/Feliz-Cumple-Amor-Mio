@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tus Regalos Especiales</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: #fdf0f0;
+            padding-bottom: 50px;
+        }
+
+        .coupon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Diseño de Vale/Cupón */
+        .coupon {
+            background: white;
+            border: 3px dashed #ffb7b2;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .coupon:hover {
+            transform: translateY(-5px) rotate(1deg);
+        }
+
+        .coupon h3 {
+            font-family: 'Playfair Display', serif;
+            color: #d81b60;
+            margin-top: 10px;
+        }
+
+        .coupon p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .coupon-icon {
+            font-size: 2.5rem;
+        }
+
+        .valid-thru {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffb7b2;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .birthday-badge {
+            background: #ff4d6d;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop autoplay>
+        <source src="music/galeria.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h1 class="script-font" style="font-size: 3.5rem;">Cupones de Cumpleaños</h1>
+        <p>Porque te mereces el mundo entero, aquí tienes unos regalitos válidos por siempre:</p>
+
+        <div class="coupon-grid">
+            <div class="coupon">
+                <div class="birthday-badge">Especial cumple</div>
+                <div class="coupon-icon">🍿</div>
+                <h3>Cena y Película</h3>
+                <p>Válido por una noche de tus películas favoritas y la comida que mi princesa elija.</p>
+                <div class="valid-thru">Válido hasta: Que dejes de ser tan hermosa</div>
+            </div>
+
+            <div class="coupon">
+                <div class="birthday-badge">Vale por...</div>
+                <div class="coupon-icon">💆‍♀️</div>
+                <h3>Masaje Relajante</h3>
+                <p>Válido por 30 minutos de masajes después de un día cansado.</p>
+                <div class="valid-thru">Válido hasta: El infinito</div>
+            </div>
+
+            <div class="coupon">
+                <div class="birthday-badge">Deseo cumplido</div>
+                <div class="coupon-icon">🍦</div>
+                <h3>Día de Helados</h3>
+                <p>Válido para ir por tu postre favorito cuando tú quieras, porque no hay que olvidar el porque estamos juntos.</p>
+                <div class="valid-thru">Válido hasta: Que te canses de mí</div>
+            </div>
+
+            <div class="coupon">
+                <div class="birthday-badge">Especial</div>
+                <div class="coupon-icon">✈️</div>
+                <h3>Aventura Juntos</h3>
+                <p>Válido por una escapada de fin de semana a donde tú elijas.</p>
+                <div class="valid-thru">Válido para: Siempre</div>
+            </div>
+        </div>
+
+        <a href="videos.html" class="btn-next">Sigamos con la sorpresa... ✨</a>
+    </div>
+
+    <script src="js/main.js"></script>
+<div id="progress-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: #ffe5ec; z-index: 9999;">
+    <div id="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb7b2, #ff4d6d); transition: width 0.5s ease-in-out;"></div>
+    <div id="heart-pointer" style="position: absolute; top: -5px; left: 0%; transition: left 0.5s ease-in-out; font-size: 15px;">❤️</div>
+</div>
+
+
+</body>
+</html>

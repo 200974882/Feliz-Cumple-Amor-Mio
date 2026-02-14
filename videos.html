@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Video Especial</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <audio id="bg-music" loop autoplay>
+        <source src="music/video-bg.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h2 class="script-font">Verte sonreír...</h2>
+        <p>Es mi cosa favorita en el mundo.</p>
+        
+        <div class="video-wrapper">
+            <video controls>
+                <source src="media/video1.mp4" type="video/mp4">
+                Tu navegador no soporta video.
+            </video>
+        </div>
+        
+        <a href="quiz.html" class="btn-next">Ahora unas preguntitas...</a>
+    </div>
+    <script src="js/main.js"></script>
+
+<div id="progress-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: #ffe5ec; z-index: 9999;">
+    <div id="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb7b2, #ff4d6d); transition: width 0.5s ease-in-out;"></div>
+    <div id="heart-pointer" style="position: absolute; top: -5px; left: 0%; transition: left 0.5s ease-in-out; font-size: 15px;">❤️</div>
+</div>
+</body>
+</html>

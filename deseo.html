@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pide un Deseo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* --- VIDEO DE FONDO --- */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .main-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px; /* Espacio entre elementos */
+            width: 100%;
+        }
+
+        .script-font {
+            font-family: 'Great Vibes', cursive;
+            color: white;
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.8);
+            margin: 0;
+        }
+
+        /* --- CONTENEDOR DEL PASTEL --- */
+        .cake-container {
+            position: relative;
+            width: 250px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cake {
+            position: relative;
+            width: 250px;
+            height: 120px;
+            background: #f191ac;
+            border-radius: 15px;
+            box-shadow: 0 10px 0 #e6739f, 0 20px 30px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .cake::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 40px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px 15px 50% 50%;
+        }
+
+        /* --- VELAS Y LLAMAS (CENTRADAS) --- */
+        .candles-row {
+            position: absolute;
+            top: -50px; /* Altura sobre el pastel */
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 5;
+        }
+
+        .candle {
+            width: 16px;
+            height: 55px;
+            background: linear-gradient(#ff4d6d, #ffb7b2);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .flame {
+            width: 22px;
+            height: 32px;
+            background: #ffcc33;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -30px; /* Ajuste manual para que toque la mecha */
+            left: 50%;
+            transform: translateX(-50%); /* CENTRADO MATEMÁTICO */
+            box-shadow: 0 0 20px #ffcc33, 0 0 40px orange;
+            animation: flicker 0.1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            from { transform: translateX(-50%) scale(1) rotate(-1deg); }
+            to { transform: translateX(-50%) scale(1.1) rotate(1deg); }
+        }
+
+        .smoke {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            filter: blur(5px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .smoke-anim { animation: rise 1.2s ease-out forwards; }
+        @keyframes rise {
+            0% { opacity: 0.8; transform: translate(-50%, 0) scale(1); }
+            100% { opacity: 0; transform: translate(-30%, -100px) scale(5); }
+        }
+
+        #final-msg { text-align: center; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div id="progress-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: rgba(255,255,255,0.2); z-index: 9999;">
+        <div id="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb7b2, #ff4d6d); transition: width 0.5s ease-in-out;"></div>
+        <div id="heart-pointer" style="position: absolute; top: -5px; left: 0%; transition: left 0.5s ease-in-out; font-size: 15px;">❤️</div>
+    </div>
+
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="media/baile.mov" type="video/mp4">
+    </video>
+
+    <audio id="musica-deseo" loop>
+        <source src="music/deseo.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="main-wrapper">
+        <div>
+            <h1 class="script-font" id="main-title" style="font-size: 3.5rem;">Pide un deseo...</h1>
+            <p id="sub-title" style="color: #ddd;">Toca las llamas para soplarlas</p>
+        </div>
+
+        <div class="cake-container">
+            <div class="candles-row">
+                <div class="candle" onclick="blow(this)"><div class="flame"></div><div class="smoke"></div></div>
+                <div class="candle" onclick="blow(this)"><div class="flame"></div><div class="smoke"></div></div>
+                <div class="candle" onclick="blow(this)"><div class="flame"></div><div class="smoke"></div></div>
+            </div>
+            <div class="cake"></div>
+        </div>
+
+        <div id="final-msg" class="hidden">
+            <h2 class="script-font" style="font-size: 3rem;">¡Felicidades mi amor! ✨</h2>
+            <a href="sorpresa.html" class="btn-next" style="margin-top: 20px;">Último paso... 🎁</a>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // --- TRUCO PARA MÚSICA AUTOMÁTICA ---
+        // Los navegadores bloquean el sonido hasta que el usuario toca algo.
+        // Como ella tiene que tocar las velas, la música empezará al primer toque.
+        const audio = document.getElementById('musica-deseo');
+        
+        let candlesOut = 0;
+        function blow(element) {
+            // Intentar reproducir música al primer clic
+            audio.play().catch(e => console.log("Música esperando interacción"));
+
+            const flame = element.querySelector('.flame');
+            const smoke = element.querySelector('.smoke');
+            
+            if(!flame.classList.contains('hidden')) {
+                flame.classList.add('hidden');
+                smoke.classList.add('smoke-anim');
+                candlesOut++;
+                
+                if(candlesOut === 3) {
+                    setTimeout(() => {
+                        document.getElementById('main-title').innerText = "✨ Deseo Enviado ✨";
+                        document.getElementById('sub-title').classList.add('hidden');
+                        document.getElementById('final-msg').classList.remove('hidden');
+                    }, 800);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

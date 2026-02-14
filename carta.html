@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Carta para Ti</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos específicos para esta página */
+        body {
+            background: linear-gradient(to bottom, #ffdde1, #ee9ca7); /* Fondo degradado romántico */
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        /* El Sol en la esquina superior */
+        .sun {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: #ffcc33;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #ffcc33;
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Nubes decorativas */
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50px;
+            opacity: 0.6;
+            z-index: 0;
+            animation: moveClouds 20s linear infinite;
+        }
+        .cloud::after, .cloud::before {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        .c1 { width: 100px; height: 40px; top: 10%; left: -150px; }
+        .c2 { width: 120px; height: 45px; top: 25%; left: -200px; animation-delay: 5s; }
+
+        @keyframes moveClouds {
+            from { left: -200px; }
+            to { left: 110vw; }
+        }
+
+        /* Pareja animada (Silueta o Ilustración) */
+        .couple-anim {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 4rem;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.2));
+            animation: sway 3s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Contenedor de la carta */
+        .letter-paper {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid #f8bbd0;
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        #typewriter {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: #d81b60;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop autoplay>
+        <source src="music/carta.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="sun"></div>
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="couple-anim">👩‍❤️‍👨</div> <div class="container">
+        <h1 class="script-font" style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">Para mi persona favorita</h1>
+        
+        <div class="letter-paper">
+            <p id="typewriter" data-text="Mi amor,
+
+Desde que llegaste a mi vida, todo tiene un color diferente. Eres mi sol en los días nublados y mi paz en medio del caos. 
+
+Gracias por cada risa, por cada abrazo, por cada beso y por elegirme cada día. En este cumpleaños tuyo, el regalo es 
+
+para mi por tenerte a mi lado. 
+
+Te amo con todo lo que soy, amor de mi vida❤️.
+
+Siempre sere tuyo, mi gorda hermosa.
+Jareth"></p>
+        </div>
+        
+        <a href="deseo.html" class="btn-next">Pide un deseo, mi amor... 🎂</a>
+    </div>
+
+    <script src="js/main.js"></script>
+
+
+<div id="progress-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: #ffe5ec; z-index: 9999;">
+    <div id="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb7b2, #ff4d6d); transition: width 0.5s ease-in-out;"></div>
+    <div id="heart-pointer" style="position: absolute; top: -5px; left: 0%; transition: left 0.5s ease-in-out; font-size: 15px;">❤️</div>
+</div>
+
+</body>
+</html>
